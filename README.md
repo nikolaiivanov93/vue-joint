@@ -18,6 +18,6 @@ npm run serve
 npm run build
 ```
 
-### Customize configuration
+### О проекте
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Данный проект демонстрирует возможности работы vue3 и библиотеки joint.js

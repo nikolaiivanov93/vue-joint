@@ -1,7 +1,7 @@
 <template>
   <div class="scale__container">
     <div>Zoom</div>
-    <el-slider v-model="value" step="10" :max="200" />
+    <el-slider v-model="value" :step=10 :max="200" />
     <div class="scale__input">{{ value }}%</div>
     <!-- <el-input-number v-model="num" step=10 name="aasd" label='qsasdadfsadsasd%' :min="0" :max="200" @change="handleChange" /> -->
   </div>
