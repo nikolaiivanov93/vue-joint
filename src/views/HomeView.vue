@@ -419,7 +419,7 @@ export default {
       this.links.push(obj);
 
       setInterval(() => {
-        if (this.nodes[output].status !== 'close' && this.nodes[input].status !== 'close') {
+        if (this.nodes[output].status !== 'close' && this.nodes[input].status !== 'close' && this.nodes['START'].status !== 'close') {
           this.animationLinks(obj.link);
         }
       }, 1000);
