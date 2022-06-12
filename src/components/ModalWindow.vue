@@ -3,7 +3,7 @@
     <el-dialog v-model="state.modal" width="50%" destroy-on-close center @open="openModal" @close="changeModal">
       <div class="modal__title">
         <el-badge
-          :value=status
+          :value="status"
           class="badge"
           :type="
             state.nodes[state.node].status === 'open'
@@ -28,7 +28,6 @@
         </div>
       </div>
       <LineChart :speed="state.nodes[state.node].options.speed" />
-      
     </el-dialog>
   </div>
 </template>
@@ -38,7 +37,7 @@ import LineChart from '@/components/LineChart.vue';
 export default {
   name: 'ModalWindow',
   components: {
-    LineChart
+    LineChart,
   },
   data() {
     return {
@@ -55,7 +54,6 @@ export default {
   },
   methods: {
     openModal() {
-
       this.status = this.state.nodes[this.state.node].status;
 
       if (this.status === 'open') {
@@ -73,23 +71,23 @@ export default {
       this.statusNode = false;
       this.status = 'close';
       this.$store.commit('setStatus', {
-        status: 'close'
+        status: 'close',
       });
       this.$emit('setStatusNode', {
         status: this.status,
         nodeName: this.state.node,
-      })
+      });
     },
     setStartNode() {
       this.statusNode = true;
       this.status = 'open';
       this.$store.commit('setStatus', {
-        status: 'open'
+        status: 'open',
       });
       this.$emit('setStatusNode', {
         status: this.status,
         nodeName: this.state.node,
-      })
+      });
     },
   },
 };
@@ -98,9 +96,9 @@ export default {
 <style lang="scss">
 .modal {
   &__title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   &__switch {
     display: flex;

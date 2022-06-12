@@ -1,11 +1,11 @@
-import { createStore } from 'vuex'
+import { createStore } from 'vuex';
 
 export default createStore({
   state: {
     nodes: null,
     node: null,
     modal: false,
-    arrSpeed: {}
+    arrSpeed: {},
   },
   getters: {
     getSpeed(state) {
@@ -13,7 +13,7 @@ export default createStore({
     },
     getNodes(state) {
       return state.nodes;
-    }
+    },
   },
   mutations: {
     setNodes(state, options) {
@@ -26,7 +26,7 @@ export default createStore({
       state.modal = options.modal;
     },
     setSpeed(state, options) {
-      state.nodes[options.nameNode].options.speed = options.speed
+      state.nodes[options.nameNode].options.speed = options.speed;
     },
     setArrSpeed(state, options) {
       state.arrSpeed[state.node] = [];
@@ -39,4 +39,4 @@ export default createStore({
       state.nodes[state.node].status = options.status;
     },
   },
-})
+});

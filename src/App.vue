@@ -1,11 +1,11 @@
 <template>
-  <el-header class="header">    
+  <el-header class="header">
     <nav>
       <router-link to="/">Graph-1</router-link>
       <!-- <router-link to="/about">About</router-link> -->
     </nav>
   </el-header>
-  <router-view/>
+  <router-view />
 </template>
 
 <script>
@@ -16,8 +16,8 @@ export default {
     let height = window.innerHeight - header.clientHeight;
 
     document.getElementById('app').style.height = `${height}px`;
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss">

@@ -120,7 +120,7 @@ export default {
               text: 'Speed',
               color: '#f87979',
             },
-          }
+          },
         },
         responsive: true,
       },
@@ -151,7 +151,7 @@ export default {
           pointRadius: 0,
           borderWidth: 2,
           yAxisID: 'y1',
-        }
+        },
       ];
 
       this.chartData.datasets = datasets;
@@ -159,7 +159,6 @@ export default {
       this.$store.commit('setArrSpeed', {
         speed: this.arrSpeed,
       });
-
     },
   },
   mounted() {

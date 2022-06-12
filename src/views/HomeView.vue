@@ -2,7 +2,7 @@
   <div class="home">
     <JointPaper :background="background" :grid-size="gridSize" :draw-grid="drawGrid" @init="setupGraph" />
     <ScalePaper @setValueScale="setValueScale" />
-    <ModalWindow @setStatusNode="setStatusNode"/>
+    <ModalWindow @setStatusNode="setStatusNode" />
   </div>
 </template>
 
@@ -10,7 +10,7 @@
 import JointPaper from '@/components/JointPaper.vue';
 import ScalePaper from '@/components/ScalePaper.vue';
 import ModalWindow from '@/components/ModalWindow.vue';
-import {getJson} from '@/hooks/getJson';
+import { getJson } from '@/hooks/getJson';
 
 export default {
   name: 'HomeView',
@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       background: {
-        color: '#ecf5ff'
+        color: '#ecf5ff',
       },
       gridSize: 10,
       drawGrid: true,
@@ -30,28 +30,32 @@ export default {
       paper: null,
       position: {
         x: 50,
-        y: window.innerHeight/2
+        y: window.innerHeight / 2,
       },
       state: {},
       links: [],
       link: {},
       nodes: {},
-    }
+    };
   },
   inject: ['$joint'],
   computed: {
     getNodes() {
       return this.$store.getters.getNodes;
-    }
+    },
   },
   watch: {
     getNodes() {
-      console.log('nodes change')
-      if (this.$store.state.node && this.$store.state.nodes[this.$store.state.node].status === 'open' && this.state[this.$store.state.node].attributes.attr['.uml-state-circle'].fill === '#bdc3c7') {
-        this.state[this.$store.state.node].prop('attr/.uml-state-circle', '#bdc3c7')
+      console.log('nodes change');
+      if (
+        this.$store.state.node &&
+        this.$store.state.nodes[this.$store.state.node].status === 'open' &&
+        this.state[this.$store.state.node].attributes.attr['.uml-state-circle'].fill === '#bdc3c7'
+      ) {
+        this.state[this.$store.state.node].prop('attr/.uml-state-circle', '#bdc3c7');
         console.log('STATE', this.state);
       }
-    }
+    },
   },
   methods: {
     setStatusNode(options) {
@@ -69,7 +73,11 @@ export default {
     setupGraph(options) {
       this.graph = options.graph;
       this.paper = options.paper;
-      this.paper.scaleContentToFit({preserveAspectRatio: true, contentArea: {width: window.innerWidth, height: window.innerHeight}, fittingBBox: {x: 0, y: 0, width: window.innerWidth, height: window.innerHeight} });
+      this.paper.scaleContentToFit({
+        preserveAspectRatio: true,
+        contentArea: { width: window.innerWidth, height: window.innerHeight },
+        fittingBBox: { x: 0, y: 0, width: window.innerWidth, height: window.innerHeight },
+      });
 
       const jsonInfo = getJson();
       // console.log(jsonInfo);
@@ -78,7 +86,7 @@ export default {
       });
 
       this.createGraph(jsonInfo);
-		},
+    },
     createGraph(options) {
       let arr = [];
 
@@ -93,8 +101,6 @@ export default {
       });
     },
     newElement(data, numEl) {
-      
-
       this.paper.setDimensions(window.innerWidth + 1000, window.innerHeight + 1000);
       this.nodes[data.name] = data;
       if (numEl > 0) {
@@ -105,24 +111,23 @@ export default {
             if (this.nodes[data.inputs[0].source].outputs[i].target === data.name) {
               if (data.type === 'multiple') {
                 if (i === 0) {
-                  this.position.y = this.state[data.inputs[0].source].attributes.position.y - 100; 
-                  this.position.x = this.state[data.inputs[0].source].attributes.position.x + 350; 
+                  this.position.y = this.state[data.inputs[0].source].attributes.position.y - 100;
+                  this.position.x = this.state[data.inputs[0].source].attributes.position.x + 350;
                 }
                 if (i === 1) {
-                  this.position.y = this.state[data.inputs[0].source].attributes.position.y + 100; 
-                  this.position.x = this.state[data.inputs[0].source].attributes.position.x + 350; 
+                  this.position.y = this.state[data.inputs[0].source].attributes.position.y + 100;
+                  this.position.x = this.state[data.inputs[0].source].attributes.position.x + 350;
                 }
               } else {
                 if (i === 0) {
-                  this.position.y = this.state[data.inputs[0].source].attributes.position.y - 180; 
-                  this.position.x = this.state[data.inputs[0].source].attributes.position.x + 350; 
+                  this.position.y = this.state[data.inputs[0].source].attributes.position.y - 180;
+                  this.position.x = this.state[data.inputs[0].source].attributes.position.x + 350;
                 }
                 if (i === 1) {
-                  this.position.y = this.state[data.inputs[0].source].attributes.position.y + 180; 
-                  this.position.x = this.state[data.inputs[0].source].attributes.position.x + 350; 
+                  this.position.y = this.state[data.inputs[0].source].attributes.position.y + 180;
+                  this.position.x = this.state[data.inputs[0].source].attributes.position.x + 350;
                 }
               }
-              
             }
           });
         }
@@ -203,7 +208,7 @@ export default {
           },
         ],
       };
-      
+
       let joint = this.$joint;
 
       let El = joint.dia.Element.extend({
@@ -239,13 +244,9 @@ export default {
               '.uml-state-circle': {
                 ref: '.uml-state-body',
                 r: 9,
-                fill: data.status === 'open'
-                  ? '#9eed9d'
-                  : data.status === 'close'
-                  ? '#bdc3c7'
-                  : '',
+                fill: data.status === 'open' ? '#9eed9d' : data.status === 'close' ? '#bdc3c7' : '',
                 'ref-y': 15,
-                'ref-x': '93%'
+                'ref-x': '93%',
               },
               '.uml-state-separator': {
                 stroke: 'none',
@@ -280,13 +281,11 @@ export default {
         ),
 
         initialize: function () {
-          this.on(
-            {
-              'change:name': this.updateName,
-              'change:events': this.updateEvents,
-              'change:size': this.updatePath,
-            },
-          );
+          this.on({
+            'change:name': this.updateName,
+            'change:events': this.updateEvents,
+            'change:size': this.updatePath,
+          });
 
           this.updateName();
           this.updateEvents();
@@ -316,8 +315,8 @@ export default {
       let element = new El()
         // .position(200, 100)
         // .size(250, 80)
-        .addTo(this.graph)
-      
+        .addTo(this.graph);
+
       if (data.outputs !== undefined && data.inputs !== undefined) {
         if (data.inputs.length > 1) {
           element.addPorts([
@@ -368,9 +367,9 @@ export default {
           this.$store.commit('setSpeed', {
             nameNode: data.name,
             speed: speed,
-          })
+          });
         }
-      }, 1000)
+      }, 1000);
 
       if (data.inputs !== undefined) {
         data.inputs.forEach((item, i) => {
@@ -407,7 +406,7 @@ export default {
       });
       this.link[input].connector('rounded');
       this.link[input].attr({
-        line: {stroke: '#808080', strokeWidth: 1, targetMarker: 'none'},
+        line: { stroke: '#808080', strokeWidth: 1, targetMarker: 'none' },
       });
       this.link[input].addTo(this.graph).reparent();
 
@@ -423,7 +422,7 @@ export default {
         if (this.nodes[output].status !== 'close' && this.nodes[input].status !== 'close') {
           this.animationLinks(obj.link);
         }
-      },1000);
+      }, 1000);
     },
     animationLinks(link) {
       var token = this.$joint.V('circle', { r: 5, fill: '#9ad5db' });
@@ -440,7 +439,7 @@ export default {
       }
     },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">

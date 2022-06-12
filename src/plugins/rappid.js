@@ -1,7 +1,7 @@
-import "jointjs/dist/joint.core.css";
+import 'jointjs/dist/joint.core.css';
 
-import { dia, elementTools, V, g, util } from "jointjs/src/core.mjs";
-import * as standard from "jointjs/src/shapes/standard.mjs";
+import { dia, elementTools, V, g, util } from 'jointjs/src/core.mjs';
+import * as standard from 'jointjs/src/shapes/standard.mjs';
 import * as basic from 'jointjs/src/shapes/basic.mjs';
 // import element from "jointjs/src/elementTools/index.mjs";
 
