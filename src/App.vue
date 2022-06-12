@@ -1,10 +1,24 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  <el-header class="header">    
+    <nav>
+      <router-link to="/">Graph-1</router-link>
+      <!-- <router-link to="/about">About</router-link> -->
+    </nav>
+  </el-header>
   <router-view/>
 </template>
+
+<script>
+export default {
+  name: 'App',
+  mounted() {
+    let header = document.querySelector('.header');
+    let height = window.innerHeight - header.clientHeight;
+
+    document.getElementById('app').style.height = `${height}px`;
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
@@ -14,17 +28,23 @@
   text-align: center;
   color: #2c3e50;
 }
+body {
+  margin: 0;
+}
 
 nav {
-  padding: 30px;
+  padding: 15px;
 
   a {
     font-weight: bold;
     color: #2c3e50;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: #fbfbfb;
     }
   }
+}
+.header {
+  background-color: #a0cfff;
 }
 </style>
